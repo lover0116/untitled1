@@ -2,12 +2,76 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>123</title>
-    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!---全局自定义样式--->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--angular js-->
+    <script src="//apps.bdimg.com/libs/angular.js/1.4.0-beta.4/angular.min.js"></script>
+    <!---全局自定义js--->
     <script src="js/init.js"></script>
+
+
 </head>
 <body>
-12324
+
+
+<div class="container-fluid">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
+
+    <div class="row" ng-app="news" ng-controller="newsInfo">
+        <div class="fenlei col-md-6 col-xs-12" ng-repeat="d in json">
+            <h3>{{d.fenlei}}</h3>
+            <ul class="newsUl">
+                <li ng-repeat="c in d.cont" class="clearfix">
+                    <a target="_blank" href="{{c.href}}" class="pull-left">{{c.title}}</a><span class="pull-right">{{c.time}}</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    angular.module("news",[]).controller("newsInfo",function($scope){
+        $scope.json = [
+            {
+                fenlei:'电脑',
+                cont:[{
+                    time:'2015-09-08',
+                    href:'lunbo.html',
+                    title:'轮播'
+                },{
+                    time:'2015-09-08',
+                    href:'xialakuang.html',
+                    title:'下拉框'
+                }]
+            },{
+                fenlei:'移动',
+                cont:[{
+                    time:'2015-09-08',
+                    href:'http://www.baidu.com/',
+                    title:'打了个喷嚏..'
+                }]
+            }
+        ];
+
+    });
+</script>
 
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;list-style-type:none;}
+    a{color:#333;text-decoration:none;}
+    .selectBox{width:100%;position:relative;}
+    .selectBox span{width:100%;height:36px;text-indent:10px;line-height:36px;display:block;background-color:#f1f1f1;}
+    .selectBox ul{width:100%;position:absolute;left:0;top:36px;display:none;background-color:#000;}
+    .selectBox a{padding:5px 10px;display:block;color:#fff;}
+    .selectBox a:hover{color:#333;background-color:#f1f1f1;}
+    .selectBox em{position:absolute;right:10px;top:15px;border:7px solid transparent;border-top-color:#333;}
+    .w180{width:180px;}
+</style>
+<div class="w180">
+    <div class="selectBox">
+        <select>
+            <option>百度</option>
+            <option>谷歌</option>
+            <option>搜狗</option>
+            <option>微软</option>
+            <option>火狐</option>
+        </select>
+    </div>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script>
+    function selectFn(o){//下拉框
+        var o = $("."+o);
+        /*
+         <em></em>
+         <span>百度</span>
+         <ul>
+         <li><a href="#">谷歌</a></li>
+         <li><a href="#">搜狗</a></li>
+         <li><a href="#">微软</a></li>
+         <li><a href="#">百度</a></li>
+         </ul>
+         */
+        var s = '<em></em>';
+        s+='<span>'+o.find("select").val()+'</span>';
+        s+='<ul>';
+        $.each(o.find("option"),function(i,n){
+
+            s += '<li><a href="#">'+$(n).text()+'</a></li>';
+
+        });
+        s+='</ul>';
+        o.html(s);
+        var ul = o.find("ul");
+        o.find("span").bind("mouseover",function(){
+            ul.slideDown(300);
+        });
+        o.bind("mouseleave",function(){
+            ul.slideUp(300);
+        });
+        ul.find("li").bind("click",function(){
+            o.find("span").text($(this).text());
+            ul.hide();
+        });
+
+    }
+</script>
+<script>
+    new selectFn("selectBox");
+</script>
+
+</body>
+</html>

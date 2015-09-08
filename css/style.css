@@ -1,4 +1,13 @@
-* {
+.newsUl {
   margin: 0;
   padding: 0;
+}
+.newsUl li {
+  list-style-type: none;
+}
+.fenlei {
+  background: #f4f4f4;
+}
+.fenlei:nth-child(2) {
+  background: #f1f1f1;
 }
