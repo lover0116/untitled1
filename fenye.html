@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分页效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;transition:all .5s;-webkit-transition:all .5s;}
+    a{color:#575757;text-decoration:none;}
+    li{list-style-type:none;}
+    .x_page{position:absolute;left:100px;top:100px;right:100px;bottom:100px;background:#f1f1f1;}
+    .x_pagebox{position:absolute;left:100px;bottom:30px;right:100px;text-align:center;}
+    .x_pagebox a{display:inline-block;padding:5px 10px;margin:0 2px;border:1px solid #ccc;border-radius:3px;}
+    .x_pagebox a:hover{background:#ccc;}
+    .x_pagebox .x_pagecur:hover{background:#000;}
+    .x_pagecur{color:#fff;background:#000;}
+</style>
+
+<div class="x_page">
+    第<br />
+    一<br />
+    页<br /><br />
+    <span style="color:red">你</span><span style="color:blue">猜</span><span style="color:yellow">有</span><span style="color:green">几</span><span style="color:orange">页</span>
+    #page
+    第<br />
+    二<br />
+    页<br /><br />
+    猜你妹
+    #page
+    第<br />
+    三<br />
+    页<br /><br />
+    今儿天气不错
+    #page
+    第<br />
+    四<br />
+    页<br /><br />
+    下了点雨，加了件棉袄
+    #page
+    第<br />
+    五<br />
+    页<br /><br />
+    手动分页，‘# page’不要空格加在要分页的位置
+    #page
+    第<br />
+    六<br />
+    页<br /><br />
+    然后split 切割成数组，每一组数字对应一个数组元素
+    #page
+    第<br />
+    七<br />
+    页<br /><br />
+    待续
+
+</div>
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        var oo = $(".x_page"),pagestr = oo.html(),pageArr = pagestr.split("#page");
+        oo.html(pageArr[0]);
+        var pageDom = '<div class="x_pagebox"><a href="#" class="x_pageprev">上一页</a>';
+        $.each(pageArr,function(i,n){
+            if(i==0){
+                pageDom += '<a href="#" class="x_pagecur x_pagenum" data-page="'+i+'">'+(i+1)+'</a>'
+                return ;
+            }
+            pageDom += '<a href="#" class="x_pagenum" data-page="'+i+'">'+(i+1)+'</a>'
+        });
+        pageDom = pageDom + '<a href="#" class="x_pagenext">下一页</a></div>';
+        oo.after(pageDom);
+        $(".x_pagenum").on("click",function(){
+            var n = $(this).attr("data-page");
+            oo.html(pageArr[n]);
+            $(this).addClass("x_pagecur").siblings().removeClass("x_pagecur");
+
+        });
+
+        var prevnext = function(n,b){
+
+
+            if(b){
+                n = n - 1;
+            }else{
+                n = n + 1;
+            }
+            if(n<0){return false;}
+            if(n > pageArr.length){return false;}
+            oo.html(pageArr[n]);
+            $(".x_pagenum").eq(n).addClass("x_pagecur").siblings().removeClass("x_pagecur");
+        };
+        $(".x_pageprev").on("click",function(){
+            var n = $(".x_pagecur").attr("data-page");
+            prevnext(parseInt(n,10),1);
+        });
+        $(".x_pagenext").on("click",function(){
+            var n = $(".x_pagecur").attr("data-page");
+            prevnext(parseInt(n,10),0);
+        });
+
+    });
+</script>
+</body>
+</html>
