@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分裂效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    .div{width:420px;height:300px;margin:0 auto;position:relative;top:200px;background:#f4f4f4;}
+    .divbox{width:420px;height:300px;position:relative;}
+    .divbox h3{text-align:center;height:30px;line-height:30px;background-color:#ccc;}
+    .divbox p{line-height:24px;padding:20px;}
+    .del{overflow:hidden;}
+</style>
+
+<div class="div">
+    <div class="divbox">
+        <h3>标题</h3>
+        <p>我是内容，内容是什么呢，内容就是你看了跟没看一样</p>
+        <p>撒地方撒地方发发生的发送方是否是否撒飞洒发撒地方撒</p>
+        <p>噶是大方爱上对方是个和人的高得分个人</p>
+    </div>
+</div>
+<input type="button" value="Click Me" />
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        $("input[type='button']").on("click",function(){
+            if($(".del").is(":animated")){
+                return ;
+            };
+
+            var _l = $(".div").offset().left,
+                    _t = $(".div").offset().top;
+
+            var _w = $(".divbox").width()/3
+            _h = $(".divbox").height()/3,
+                    _s = $(".div").clone();
+
+            $(".divbox").css("visibility","hidden");
+            for(var i=0;i<3;i++){
+                for(var j=0;j<3;j++){
+                    $("<div />")
+                            .css({
+                                width:_w+"px",
+                                height:_h + "px",
+                                position:"absolute",
+                                left:_l+(j*_w) + "px",
+                                top:_t+(i*_h) + "px",
+                                overflow:"hidden"
+                            })
+                            .addClass("del")
+                            .html(_s.html())
+                            .appendTo($("body"))
+                            .find(".divbox")
+                            .css({
+                                left:-_w * j,
+                                top:-_h * i
+                            })
+                            .end()
+                            .animate({
+                                left:(_l+((j*2-1)*_w))+"px",
+                                top:(_t+((i*2-1)*_h))+"px",
+                                opacity:0
+                            },500,function(){
+                                $(".del").remove();
+                                $(".divbox").css("visibility","visible");
+                            });
+
+                    //console.log("w:"+(_l+((j-1)*_w))+"||h:"+(_t+((i-1)*_h)));
+                }
+            };
+
+
+        });
+    });
+</script>
+</body>
+</html>

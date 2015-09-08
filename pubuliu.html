@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>瀑布流</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+
+    ul{width:1000px;margin:0 auto;position:relative;}
+    li{width:230px;margin:10px;position:absolute;left:0;top:0;color:#fff;background:#000;}
+</style>
+<ul>
+    <li style="height:100px;background:red">1</li>
+    <li style="height:50px;background:blue">2</li>
+    <li style="height:30px;background:green">3</li>
+    <li style="height:40px;background:orange">4</li>
+    <li style="height:60px;background:#900">5</li>
+    <li style="height:70px;background:#ccc">6</li>
+    <li style="height:80px;background:#000">7</li>
+    <li style="height:120px;background:#ee223c">8</li>
+    <li style="height:300px;background:#ff2299">9</li>
+    <li style="height:100px;background:#eee">10</li>
+    <li style="height:100px;background:red">11</li>
+    <li style="height:120px;background:#ee223c">12</li>
+    <li style="height:300px;background:#ff2299">13</li>
+    <li style="height:100px;background:#eee">14</li>
+    <li style="height:100px;background:red">15</li>
+    <li style="height:50px;background:blue">16</li>
+    <li style="height:30px;background:green">17</li>
+    <li style="height:40px;background:orange">18</li>
+    <li style="height:60px;background:#900">19</li>
+    <li style="height:70px;background:#ccc">20</li>
+    <li style="height:80px;background:#000">21</li>
+    <li style="height:120px;background:#ee223c">22</li>
+    <li style="height:300px;background:#ff2299">23</li>
+    <li style="height:100px;background:red">24</li>
+    <li style="height:50px;background:blue">25</li>
+    <li style="height:30px;background:green">26</li>
+    <li style="height:40px;background:orange">27</li>
+    <li style="height:60px;background:#900">28</li>
+    <li style="height:70px;background:#ccc">29</li>
+    <li style="height:80px;background:#000">30</li>
+    <li style="height:120px;background:#ee223c">31</li>
+    <li style="height:300px;background:#ff2299">32</li>
+</ul>
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    var aa = [0,0,0,0];
+    var num=0,w=250;
+
+    //返回列高度最小索引
+    function reMin(arr){
+        num = 0;
+        for(var i = 0,len=arr.length;i<len;i++){
+            if(arr[i]<arr[num]){
+                num = i;
+            }
+        }
+        return num;
+    }
+
+    //添加当前对象高度到最小高度列
+    function setarr(h){
+        aa[num] = aa[num] + h;
+    };
+
+    $(function(){
+        var _h = 0;
+        //遍历li，定位
+        $.each($("li"),function(i,n){
+            //获取当前添加对象的高度及边距
+            _h = $(n).height()+parseInt($(n).css("marginBottom").replace("px",""),10);
+            //返回最小列
+            reMin(aa);
+            //设置li位置
+            $(n).css({
+                left:function(){
+                    return num*w;
+                },
+                top:function(){
+                    return aa[num];
+                },
+            });
+            //最小列高度加上当前高度
+            setarr(_h);
+        });
+    })
+</script>
+</body>
+</html>

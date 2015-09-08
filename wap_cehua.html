@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>侧滑</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+    .wap_page{width:100%;min-width:320px;}
+    .wap_slide{width:100%;height:100%;position:fixed;left:0;top:0;opacity:0;transition:all .1s;-webkit-transition:all .3s;background:rgba(0,0,0,.5);}
+    .wap_slideShow{transform:translateX(0)!important;-webkit-translateX(0)!important;opacity:1!important;}
+    .wap_slideBox{width:80%;height:100%;background:#fff;}
+</style>
+
+<div class="wap_page">
+    <a href="#1" class="clickMe">Click Me</a>
+</div>
+
+<div class="wap_slide">
+    <div class="wap_slideBox">
+        当~当~当~当，华丽登场。
+    </div>
+</div>
+
+
+
+
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+$(function(){
+    $(".wap_slide").css({
+        "height":$(window).height(),
+        "transform":"translateX(-"+($(window).width())+"px)"
+    });
+    $(".clickMe").on("tap",function(){
+        $(".wap_slide").addClass("wap_slideShow");
+    });
+    $(".wap_slide").on("touchend",function(e){
+        var touch = e.changedTouches[0];
+        //console.log(touch.pageX,touch.pageY);
+        if(touch.pageX > $(window).width()*0.8){
+            $(".wap_slide").removeClass("wap_slideShow");
+        }
+    });
+
+});
+</script>
+</body>
+</html>
