@@ -7,31 +7,47 @@
 </head>
 <body>
 <style>
-    *{margin:0;padding:0;}
+    *{margin:0;padding:0;transition:all .5s;-webkit-transition:all .5s;}
     li{list-style-type:none;}
+    .dsn{display:none;}
+    .x_tabbox{width:500px;height:400px;position:absolute;left:50%;top:50%;margin:-200px 0 0 -250px;}
+    .x_tab{width:100%;}
+    .x_tab:after{clear:both;content:'';display:block;}
+    .x_tab li{padding:5px 10px;float:left;cursor:pointer;border:1px solid #ccc;}
+    .x_tabfocus{color:#fff;background:#f00;}
+    .x_tabcon{width:100%;min-height:300px;padding:10px;border:1px solid #ccc;}
 </style>
+<div class="x_tabbox">
 
-<div class="x_tab">
-    <ul>
-        <li>标签一</li>
-        <li>标签二</li>
-        <li>标签三</li>
-    </ul>
+<ul class="x_tab">
+    <li class="x_tabfocus">标签一</li>
+    <li>标签二</li>
+    <li>标签三</li>
+</ul>
+
+<div class="x_tabcon" data-tab = "x_tab">
+    内容层设置 data-tab = "x_tab"
 </div>
-<div class="x_tabcon">
-    内容一
+<div class="x_tabcon dsn" data-tab = "x_tab">
+    这里的 x_tab 表示 标签层 ul的 class
 </div>
-<div class="x_tabcon">
-    内容二
-</div>
-<div class="x_tabcon">
-    内容三
+<div class="x_tabcon dsn" data-tab = "x_tab">
+    待续...
 </div>
 
 
-
+</div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/init.js"></script>
+<script>
+    $(function(){
+        $(".x_tab li").on("click",function(){
+            var _this = $(this),ind = _this.index(),_thiscon = $(".x_tabcon[data-tab='x_tab']");
+            _this.addClass("x_tabfocus").siblings().removeClass("x_tabfocus");
+            _thiscon.hide().eq(ind).show();
+        });
+    });
+</script>
 </body>
 </html>
