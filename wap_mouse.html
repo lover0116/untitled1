@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>touchstart,touchmove,touchend</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+
+    .x_page{width:50px;height:50px;border-radius:25px;position:absolute;left:0;top:0;background:#000;}
+</style>
+
+<div class="x_page">
+
+</div>
+
+
+
+
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        var _page = $(".x_page"),_w = _page.width()/ 2,_h = _page.height()/2;
+        $(document).on("touchstart",function(e){
+            var touch = e.touches[0],_x = touch.pageX,_y = touch.pageY;
+            //console.log("touchstart",_x,_y);
+            _page.css({
+                left:_x-_w,
+                top:_y-_h
+            });
+        });
+        $(document).on("touchmove",function(e){
+            var touch = e.touches[0],_x = touch.pageX,_y = touch.pageY;
+            //console.log("touchmove",_x,_y);
+            $(".x_page").css({
+                left:_x-_w,
+                top:_y-_h
+            });
+        });
+        $(document).on("touchend",function(e){
+            var touch = e.changedTouches[0],_x = touch.pageX,_y = touch.pageY;
+            //console.log("touched",_x,_y);
+            $(".x_page").css({
+                left:_x-_w,
+                top:_y-_h
+            });
+        });
+    });
+</script>
+</body>
+</html>
