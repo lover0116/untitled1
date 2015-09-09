@@ -93,6 +93,15 @@
 
     });
 </script>
-
+<script>
+    $(function(){
+        $(".newsUl li").on("mouseover",function(){
+            $(this).css({"backgroundColor":"#f00"});
+        });
+        $(".newsUl li").on("mouseleave",function(){
+            $(this).removeAttr("style");
+        });
+    });
+</script>
 </body>
 </html>
