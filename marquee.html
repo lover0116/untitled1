@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>模板</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+    .x_marquee_box{width:500px;height:200px;position:relative;overflow:hidden;margin:0 auto;border:1px solid #ccc;}
+    .x_marqeeUl{width:100%;position:absolute;left:0;top:0;}
+    .x_marqeeUl li{line-height:24px;}
+    .x_left,.x_right{width:9999px;overflow:hidden;}
+    .x_left li,.x_right li{width:100px;float:left;margin:0 10px;padding-top:50px;background:#f4f4f4;}
+
+
+</style>
+
+<div class="x_marquee_box">
+    <ul class="x_marqeeUl" id="x_marqeeUl">
+        <li>1今儿天气真不错呀~</li>
+        <li>2今儿天气真不错呀~</li>
+        <li>3今儿天气真不错呀~</li>
+        <li>4今儿天气真不错呀~</li>
+        <li>5今儿天气真不错呀~</li>
+        <li>6今儿天气真不错呀~</li>
+        <li>7今儿天气真不错呀~</li>
+        <li>8今儿天气真不错呀~</li>
+        <li>9今儿天气真不错呀~</li>
+        <li>0今儿天气真不错呀~</li>
+    </ul>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+function xRolfn(op){
+    var _oo = $("#"+op.id),_li=_oo.children("li"),_len = _li.length,_w= _oo.width(),_h = _oo.height(),_dir=op.dir||"top",_nn= 0,_timer=null;
+    _oo.addClass("x_"+_dir);
+    _oo.html(_oo.html()+_oo.html());
+
+    var dirfn = {
+        reparseint:function(n){
+            n=n.replace("px","");
+            return parseInt(n,10);
+        },
+        top:function(){
+            _nn = _oo.position().top - 1;
+            if(_nn <= -_h){
+                _nn = 0;
+            }
+            _oo.css("top",_nn+"px");
+            _timer = setTimeout(dirfn.top,20);
+        },
+        bottom:function(){
+            $(".x_bottom").css("top",-_h);
+            var bottomfn = function(){
+                _nn = _oo.position().top + 1;
+                if(_nn >=0){
+                    _nn = -_h;
+                }
+                _oo.css("top",_nn+"px");
+                _timer = setTimeout(bottomfn,20);
+            };
+            bottomfn();
+        },
+        left:function(){
+            var __w = dirfn.reparseint($("#"+op.id).find("li:first").css("marginLeft"))+dirfn.reparseint($("#"+op.id).find("li:first").css("marginRight"))+dirfn.reparseint($("#"+op.id).find("li:first").css("width"));
+            __w = __w*_len;
+            var leftfn = function(){
+                _nn = _oo.position().left - 1;
+                if(_nn <= -__w){
+                    _nn = 0;
+                }
+                _oo.css("left",_nn+"px");
+                _timer = setTimeout(leftfn,20);
+            };
+            leftfn();
+        },
+        right:function(){
+            var __w = dirfn.reparseint($("#"+op.id).find("li:first").css("marginLeft"))+dirfn.reparseint($("#"+op.id).find("li:first").css("marginRight"))+dirfn.reparseint($("#"+op.id).find("li:first").css("width"));
+            __w = __w*_len;
+            $(".x_right").css("left",-__w);
+            var rightfn = function(){
+                _nn = _oo.position().left + 1;
+                console.log(_nn);
+                if(_nn >= 0){
+                    _nn = -__w;
+                }
+                _oo.css("left",_nn+"px");
+                _timer = setTimeout(rightfn,20);
+            };
+            rightfn();
+
+        },
+        mouseleavecall:function(callback){
+            _oo.mouseleave(function(){
+                _timer = setTimeout(callback,100);
+            });
+        }
+    };
+
+    _oo.mouseover(function(){
+        clearTimeout(_timer);
+    });
+
+    if(_dir=="top"){
+        _timer = setTimeout(dirfn.top,100);
+        dirfn.mouseleavecall(dirfn.top);
+        return false;
+    }
+    if(_dir=="bottom"){
+        _timer = setTimeout(dirfn.bottom,100);
+        dirfn.mouseleavecall(dirfn.bottom);
+        return false;
+    }
+    if(_dir=="left"){
+        _timer = setTimeout(dirfn.left,100);
+        dirfn.mouseleavecall(dirfn.left);
+        return false;
+    }
+    if(_dir=="right"){
+        _timer = setTimeout(dirfn.right,100);
+        dirfn.mouseleavecall(dirfn.right);
+        return false;
+    }
+
+    _timer = setTimeout(dirfn.top,100);
+
+
+
+
+};
+new xRolfn({
+    "dir":"bottom",//left 左；right 右；top 上；bottom 下；
+    "id":"x_marqeeUl"//滚动层id
+})
+</script>
+</body>
+</html>
