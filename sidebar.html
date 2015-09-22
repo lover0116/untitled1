@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>导航一__类似京东</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;font-size:14px;}
+    body,html{color:#333;}
+    li{list-style-type:none;}
+    a{color:#333;text-decoration:none;}
+
+    .xNavbox{width:100%;height:46px;border-bottom:2px solid #b61d1d;}
+    .xnav{width:1000px;margin:0 auto;position:relative;}
+    .xnav:after{clear:both;overflow:hidden;display:block;font-size:0;content:'';zoom:1;}
+
+    .xnavleft{width:200px;position:absolute;left:0;top:0;}
+    .xnavtitle{width:100%;height:48px;line-height:48px;text-align:center;color:#fff;font-size:16px;background:#b61d1d;}
+    .xnavUl{width:100%;height:406px;color:#fff;background:#c81623;}
+    .xnavUl li{height:48px;padding:5px 0 5px 10px;position:relative;}
+    .xnavUl .xlifocus{color:#b72222;background:#fff;}
+    .xnavUl .xlifocus a{color:#b72222;}
+    .xnavUl li h4{line-height:24px;}
+    .xnavUl li a{color:#fff;line-height:24px;margin-right:10px;font-size:12px;}
+    .xnavUl li em{position:absolute;right:10px;top:50%;display:block;height:48px;line-height:48px;margin-top:-24px;font-family:Arial;}
+    .xnav_item_box{width:800px;height:406px;position:absolute;left:200px;top:48px;display:none;background:#f4f4f4;}
+    .xnav_item{width:800px;height:406px;line-height:406px;text-align:center;display:none;}
+
+    .xmenu{width:800px;float:left;margin-left:200px;display:inline;}
+    .xmenu li{float:left;margin:0 30px;height:46px;line-height:46px;}
+</style>
+
+<div class="xNavbox">
+    <div class="xnav">
+        <div class="xnavleft">
+            <h3 class="xnavtitle">全部分类</h3>
+            <ul class="xnavUl">
+                <li>
+                    <h4>职业医生</h4>
+                    <a href="#">医生一</a><a href="#">医生二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业药师</h4>
+                    <a href="#">药师一</a><a href="#">药师二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业医生</h4>
+                    <a href="#">医生一</a><a href="#">医生二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业药师</h4>
+                    <a href="#">药师一</a><a href="#">药师二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业医生</h4>
+                    <a href="#">医生一</a><a href="#">医生二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业药师</h4>
+                    <a href="#">药师一</a><a href="#">药师二</a>
+                    <em>&gt;</em>
+                </li>
+                <li>
+                    <h4>职业医生</h4>
+                    <a href="#">医生一</a><a href="#">医生二</a>
+                    <em>&gt;</em>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="xmenu">
+            <li><a href="#">会计师</a></li>
+            <li><a href="#">经济师</a></li>
+            <li><a href="#">卫生资格</a></li>
+            <li><a href="#">猜猜</a></li>
+        </ul>
+
+        <div class="xnav_item_box">
+            <div class="xnav_item xnav_item0">
+                栏目一
+            </div>
+            <div class="xnav_item xnav_item1">
+                栏目二
+            </div>
+            <div class="xnav_item xnav_item2">
+                栏目三
+            </div>
+            <div class="xnav_item xnav_item3">
+                栏目四
+            </div>
+            <div class="xnav_item xnav_item4">
+                栏目五
+            </div>
+            <div class="xnav_item xnav_item5">
+                栏目六
+            </div>
+            <div class="xnav_item xnav_item6">
+                栏目七
+            </div>
+        </div>
+
+    </div>
+</div>
+<img src="http://b.topksw.com/static/images/main/souye-banner7.jpg" width="100%" height="406" />
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+function navfn(cls){
+    var oo = $("."+cls);
+    var showitem = function(ind){
+        var _this = $(".xnav_item"+ind),_parent = _this.parent();
+        _parent.show();
+        _this.show().siblings().hide();
+    };
+    var hideitem = function(){
+        $(".xnav_item_box").hide();
+        $(".xlifocus").removeClass("xlifocus");
+    };
+
+    oo.find("li").on("mouseover",function(){
+        $(this).addClass("xlifocus").siblings().removeClass("xlifocus");
+        showitem($(this).index());
+    });
+    oo.on("mouseleave",function(){
+        setTimeout(function(){
+            if(!$(".xnav_item_box").hasClass("xnavhover")){
+                hideitem();
+            }
+        },100)
+    });
+    $(".xnav_item_box").on("mouseover",function(){
+        $(this).addClass("xnavhover");
+        //hideitem();
+    });
+    $(".xnav_item_box").on("mouseleave",function(){
+        $(".xnavhover").removeClass("xnavhover");
+        hideitem();
+    });
+}
+
+new navfn("xnavUl");
+</script>
+
+</body>
+</html>
