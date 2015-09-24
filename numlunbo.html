@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>轮播--数字</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+
+    .xbanner{width:100%;height:620px;position:relative;overflow:hidden;}
+    .xbannerRoll{width:1920px;height:620px;position:absolute;left:50%;top:0;margin-left:-960px;}
+    .xbannerUl{width:9999px;height:620px;position:absolute;left:0;top:0;}
+    .xbannerUl li{width:1920px;height:620px;float:left;background-repeat:no-repeat;background-position:center top;}
+    .xbannerNum{width:100%;height:20px;position:absolute;left:0;bottom:20px;text-align:center;}
+    .xbannerNum a{width:18px;height:18px;font-size:14px;font-family:Arial;text-decoration:none;line-height:18px;margin:0 2px;display:inline-block;color:#333;
+        -webkit-transition: background .5s;
+        -moz-transition: background .5s;
+        -ms-transition: background .5s;
+        -o-transition: background .5s;
+        transition: background .5s;border:1px solid #ccc;background:#fff;}
+    .xbannerNum .xbnr{color:#fff;border-color:#f00;background:#f00;}
+</style>
+
+<div class="xbanner">
+    <div class="xbannerRoll">
+        <ul class="xbannerUl">
+
+        </ul>
+    </div>
+</div>
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+$(function(){
+    var reStr = function(o){
+        var _str = "";
+        _str += '<div class="xbannerNum">';
+        $.each(o,function(i,n){
+            if(i==0){
+                _str += '<a href="#" class="xbnr">'+(i+1)+'</a>';
+            }else{
+                _str += '<a href="#">'+(i+1)+'</a>';
+            }
+
+        });
+        _str += '</div>';
+        return _str;
+    };
+    var reLi = function(o,n){
+        return '<li style="background-image:url('+o[n]+');"></li>'
+    };
+    var arr = [];
+    arr[0] = 'http://b.topksw.com/static/images/main/souye-banner1.jpg';
+    arr[1] = 'http://b.topksw.com/static/images/main/souye-banner2.jpg';
+    arr[2] = 'http://b.topksw.com/static/images/main/souye-banner7.jpg';
+
+    $(".xbanner").append(reStr(arr));
+
+    var xbnrfn = function(ind){
+        var _ul = $(".xbannerUl"),_len = _ul.find("li").length;
+        if(_len < ind + 1){
+            $(".xbannerUl").append(reLi(arr,ind));
+        }
+        _ul.animate({left:-ind*1920},400,function(){
+            $(".xbanner a").eq(ind).addClass("xbnr").siblings().removeClass("xbnr");
+        });
+    };
+
+
+    $(".xbannerNum a").on("click",function(){
+        var _ind = $(this).index();
+        xbnrfn(_ind);
+
+    });
+    $(".xbannerNum a:first").trigger("click");
+
+    var xbnrLoop = function(){
+        var _ind = $(".xbnr").index() + 1;
+        if(_ind >= arr.length){
+            _ind = 0;
+        }
+        xbnrfn(_ind);
+        timer = setTimeout(xbnrLoop,2000);
+    };
+    var timer = setTimeout(xbnrLoop,2000);
+
+});
+
+</script>
+</body>
+</html>
