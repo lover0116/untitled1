@@ -21,11 +21,16 @@
     .xnavpopup{width:1000px;height:400px;display:none;position:absolute;left:0;top:48px;box-shadow:1px 1px 5px rgba(0,0,0,.5);background:#fff;}
     .xnavpopupSort{padding:20px;line-height:24px;}
     .xnavpopupSort a{display:inline-block;margin-right:5px;font-family:Arial;}
-    .xnavpopupUl{width:100%;}
+    .xnavpopupSort .xred,.xnavpopupSort a:hover{color:#f00;}
+    .xnavpopupUl{width:100%;display:none;}
+    #a{display:block;}
     .xnavpopupUl li{width:100px;height:100px;margin:5px 20px;display:inline;float:left;background:#ccc;}
+
+
 
     .xmenu{width:800px;float:left;margin-left:200px;display:inline;}
     .xmenu li{float:left;margin:0 30px;height:46px;line-height:46px;}
+
 
 
 </style>
@@ -35,12 +40,25 @@
         <div class="xnavleft" id="mouseOverShowChild">
             <h3 class="xnavtitle">全部分类</h3>
             <div class="xnavpopup">
-                <div class="xnavpopupSort">按字母排序：<a href="#">A</a><a href="#">B</a></div>
-                <ul class="xnavpopupUl">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
+                <!-----字母a标签上的data-id 对应下面显示层的id---->
+                <div class="xnavpopupSort">按字母排序：<a href="#" class="xred" data-id="a">A</a><a href="#" data-id="b">B</a><a href="#" data-id="c">C</a></div>
+                <ul class="xnavpopupUl" id="a">
+                    <li>a</li>
+                    <li>a</li>
+                    <li>a</li>
+                    <li>a</li>
+                </ul>
+                <ul class="xnavpopupUl" id="b">
+                    <li>b</li>
+                    <li>b</li>
+                    <li>b</li>
+                    <li>b</li>
+                </ul>
+                <ul class="xnavpopupUl" id="c">
+                    <li>c</li>
+                    <li>c</li>
+                    <li>c</li>
+                    <li>c</li>
                 </ul>
             </div>
         </div>
@@ -72,6 +90,14 @@ function popupnav(id){
     });
 
 }
+$(function(){
+   $(".xnavpopupSort a").on("mouseover",function(){
+       var _id = $(this).attr("data-id");
+       $(this).addClass("xred").siblings().removeClass("xred");
+       $(".xnavpopupUl").hide();
+       $("#"+_id).show();
+   })
+});
   new popupnav("mouseOverShowChild");
 </script>
 
