@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>点击切换</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    a{text-decoration:none;}
+    li{list-style-type:none;}
+
+    .xlinkbox{width:100%;}
+    .xlinkimg{width:100%;height:60px;overflow:hidden;font-size:0;color:#fff;text-align:center;margin-bottom:10px;}
+    .xlinkimg img{width:200px;height:60px;display:inline-block;margin:0 10px;}
+
+    .xlinkbtn{width:100%;text-align:center;}
+    .xlinkbtn a{width:30px;height:30px;display:inline-block;margin:0 10px;text-align:center;line-height:30px;border:1px solid #ccc;}
+    .xlinkbtn a:hover{color:#fff;background-color:#f00;}
+
+</style>
+
+<div class="xlinkbox">
+    <div class="xlinkimg">
+        <a href="#">1<img src="http://b.topksw.com/static/images/main/gaoji.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/shenji.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/tongji.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/yaoshi.jpg" /></a>
+        #page
+        <a href="#">2<img src="http://b.topksw.com/static/images/main/cpa.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/tongji.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/yaoshi.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/yaoshi.jpg" /></a>
+        #page
+        <a href="#">3<img src="http://b.topksw.com/static/images/main/cpa.jpg" /></a>
+        <a href="#"><img src="http://b.topksw.com/static/images/main/shenji.jpg" /></a>
+    </div>
+    <p class="xlinkbtn"><a href="#1" class="xlinkleftbtn">&lt;</a><a href="#1" class="xlinkrightbtn">&gt;</a></p>
+</div>
+
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+$(function(){
+    var _html = $(".xlinkimg").html(),
+        arrLink=_html.split("#page"),xlinkNum=0;
+    $(".xlinkimg").html(arrLink[0]);
+    $(".xlinkrightbtn").on("click",function(){
+        xlinkNum += 1;
+        if(xlinkNum >= arrLink.length){
+            xlinkNum = 0;
+        }
+        $(".xlinkimg").html(arrLink[xlinkNum]);
+    });
+    $(".xlinkleftbtn").on("click",function(){
+        xlinkNum -= 1;
+        if(xlinkNum < 0){
+            xlinkNum = arrLink.length - 1;
+        }
+        $(".xlinkimg").html(arrLink[xlinkNum]);
+    });
+
+    var xlinkTimer = setInterval(function(){
+        $(".xlinkrightbtn").trigger("click");
+    },5000);
+
+
+
+});
+
+</script>
+</body>
+</html>
