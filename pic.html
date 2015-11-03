@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>图片文字上下滑动效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    .xPicUl{width:1000px;margin:0 auto;overflow:hidden;}
+    .xPicUl li{width:240px;height:200px;margin:5px;float:left;position:relative;overflow:hidden;}
+    img{width:100%;height:200px;}
+    .xPic_pic{position:absolute;bottom:200px;}
+    .xPic_font{width:100%;height:30px;line-height:30px;position:absolute;top:200px;color:#fff;background:#000;display:block;text-align:center;}
+</style>
+
+
+<ul class="xPicUl">
+    <li>
+        <a href="http://www.baidu.com/">
+            <img src="images/1.jpg" >
+            <img src="images/2.jpg" class="xPic_pic">
+            <span class="xPic_font">我是文字，我是文字</span>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com/">
+            <img src="images/1.jpg" >
+            <img src="images/2.jpg" class="xPic_pic">
+            <span class="xPic_font">我是文字，我是文字</span>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com/">
+            <img src="images/1.jpg" >
+            <img src="images/2.jpg" class="xPic_pic">
+            <span class="xPic_font">我是文字，我是文字</span>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com/">
+            <img src="images/1.jpg" >
+            <img src="images/2.jpg" class="xPic_pic">
+            <span class="xPic_font">我是文字，我是文字</span>
+        </a>
+    </li>
+    <li>
+        <a href="http://www.baidu.com/">
+            <img src="images/1.jpg" >
+            <img src="images/2.jpg" class="xPic_pic">
+            <span class="xPic_font">我是文字，我是文字</span>
+        </a>
+    </li>
+</ul>
+
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        //
+        $(".xPicUl li").on("mouseover",function(){
+            $(this).find(".xPic_pic").animate({
+                bottom:0
+            },200);
+            $(this).find(".xPic_font").animate({
+                top:"170px"
+            },200);
+        });
+        $(".xPicUl li").on("mouseleave",function(){
+            $(this).find(".xPic_pic").animate({
+                bottom:"200px"
+            },200);
+            $(this).find(".xPic_font").animate({
+                top:"200px"
+            },200);
+        });
+
+    });
+</script>
+</body>
+</html>
