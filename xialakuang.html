@@ -43,12 +43,16 @@
          <li><a href="#">百度</a></li>
          </ul>
          */
-        var s = '<em></em>';
-        s+='<span>'+o.find("select").val()+'</span>';
+        var s = '<em></em>',v = o.find("select").val();
+        s+='<span>'+v+'</span>';
         s+='<ul>';
         $.each(o.find("option"),function(i,n){
+            if($(n).text()==v){
+                s += '<li style="display:none;"><a href="#">'+$(n).text()+'</a></li>';
+            }else{
+                s += '<li><a href="#">'+$(n).text()+'</a></li>';
+            }
 
-            s += '<li><a href="#">'+$(n).text()+'</a></li>';
 
         });
         s+='</ul>';
@@ -61,7 +65,11 @@
             ul.slideUp(300);
         });
         ul.find("li").bind("click",function(){
+            ul.find("li").show();
+            $(this).hide();
+
             o.find("span").text($(this).text());
+
             ul.hide();
         });
 
