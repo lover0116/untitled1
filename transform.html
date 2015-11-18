@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>css3_transform</title>
+</head>
+<body>
+<style>
+.box{width:1000px;margin:0 auto;position:relative;background:rgba(0,0,0,.5);}
+
+    .a1,.a2{width:200px;height:200px;overflow:hidden;display:block;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
+    .a1 img,.a2 img{display:block;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
+    .a1:hover{transform:translateX(-10px);-webkit-transform:translateY(-10px);}
+    .a2:hover{transform:scale(1.2);-webkit-transform:scale(1.2);}
+
+    .font{position:absolute;left:500px;top:50px;color:#f00;-webkit-transition:all .5s;-moz-transition:all .5s;-ms-transition:all .5s;-o-transition:all .5s;}
+</style>
+<div class="box">
+    <a href="#" class="a1"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" ></a>
+    <a href="#" class="a2"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" ></a>
+
+    <span class="font">飘阿飘阿~~</span>
+</div>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        var _left = $(".font").position().left,
+                _top = $(".font").position().top;
+        $(".box").on("mousemove",function(e){
+            var x = e.pageX,y= e.pageY;
+            $(".font").css({
+                left:_left + (x/10),
+                top:_top + (y/10)
+            });
+        })
+
+    });
+</script>
+</body>
+</html>
