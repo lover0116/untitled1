@@ -9,16 +9,42 @@
 <style>
 .box{width:1000px;margin:0 auto;position:relative;background:rgba(0,0,0,.5);}
 
-    .a1,.a2{width:200px;height:200px;overflow:hidden;display:block;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
+    .a1,.a2{width:200px;height:200px;position:relative;overflow:hidden;display:block;border-radius:200px;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
     .a1 img,.a2 img{display:block;transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
     .a1:hover{transform:translateX(-10px);-webkit-transform:translateY(-10px);-moz-transform:translateY(-10px);-ms-transform:translateY(-10px);-o-transform:translateY(-10px);}
     .a2:hover{transform:scale(1.2);-webkit-transform:scale(1.2);-moz-transform:scale(1.2);-ms-transform:scale(1.2);-o-transform:scale(1.2);}
 
+    .guang{width:200px;height:10px;display:block;opacity:0;filter:Alpha(opacity=0);position:absolute;left:50px;top:0;background:rgba(255,255,255,.5);transform:skewX(60deg);-webkit-transform:skewY(60deg);-moz-transform:skewY(60deg);-ms-transform:skewY(60deg);-o-transform:skewY(60deg);transition:all .2s;-webkit-transition:all .2s;-moz-transition:all .2s;-ms-transition:all .2s;-o-transition:all .2s;}
+    .a1:hover .guang{left:0;top:290px;opacity:1;filter:Alpha(opacity=100);}
+
     .font{position:absolute;left:500px;top:50px;color:#f00;-webkit-transition:all .5s;-moz-transition:all .5s;-ms-transition:all .5s;-o-transition:all .5s;}
+
+.a2:hover .guang
+{
+
+    animation:mymove 5s infinite;
+    -webkit-animation:mymove 5s infinite; /*Safari and Chrome*/
+}
+
+@keyframes mymove
+{
+    from {left:50px;top:0;opacity:0;filter:Alpha(opacity=0);}
+    to {left:0;top:290px;opacity:1;filter:Alpha(opacity=100);}
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+    from {left:50px;top:0;opacity:0;filter:Alpha(opacity=0);}
+    to {left:0;top:290px;opacity:1;filter:Alpha(opacity=100);}
+}
 </style>
 <div class="box">
-    <a href="#" class="a1"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" ></a>
-    <a href="#" class="a2"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" ></a>
+    <a href="#" class="a1"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" >
+        <span class="guang"></span>
+    </a>
+    <a href="#" class="a2"><img src="http://www.niupu.com/themes/simple/images/v2/caster/yangbaby.png" >
+        <span class="guang"></span>
+    </a>
 
     <span class="font">飘阿飘阿~~</span>
 </div>
