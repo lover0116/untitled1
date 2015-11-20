@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>分裂效果</title>
+    <title>js模拟滚动条</title>
 </head>
 <body>
 <style>
@@ -76,12 +76,12 @@
                 he3 = he1 * he1 / he2;
 
         bar.css({
-            height: he3 + "px"
+            height: he3 + "px",
+            top:(roll.scrollTop() * he1 / he2)+"px"
         });
         //console.log(he1,he2);
         roll.on("scroll", function () {
             var _top = roll.scrollTop() * he1 / he2;
-            //console.log(_top);
 
             bar.css({
                 top: _top + "px"
