@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分裂效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    .x_scroll{width:200px;height:500px;position:relative;overflow:hidden;background:#f1f1f1;}
+    .x_scrollbox{width:120%;height:100%;overflow-y:scroll;}
+    .x_scrollbar{width:5px;height:100px;position:absolute;right:10px;top:0;bottom:0;background:#000;}
+
+    #r2{margin-left:50px;}
+    #r2 .x_scrollbar{background-color:#f00;}
+    .fl{float:left;}
+</style>
+<div class="x_scroll fl" id="r1">
+    <div class="x_scrollbox">
+        <div class="x_scrollCon">
+            3<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >2<br >
+            3<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >4<br >
+        </div>
+    </div>
+
+    <div class="x_scrollbar">
+
+    </div>
+</div>
+
+
+<div class="x_scroll fl" id="r2">
+    <div class="x_scrollbox">
+        <div class="x_scrollCon">
+            3<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >2<br >
+            3<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >
+            1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >1<br >4<br >
+        </div>
+    </div>
+
+    <div class="x_scrollbar">
+
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    function bar(id){
+        var oBox = $("#"+id),
+                roll = oBox.find(".x_scrollbox"),
+                box = oBox.find(".x_scrollCon"),
+                bar = oBox.find(".x_scrollbar"),
+                he1 = oBox.height(),
+                he2 = box.outerHeight(),
+                he3 = he1 * he1 / he2;
+
+        bar.css({
+            height: he3 + "px"
+        });
+        //console.log(he1,he2);
+        roll.on("scroll", function () {
+            var _top = roll.scrollTop() * he1 / he2;
+            //console.log(_top);
+
+            bar.css({
+                top: _top + "px"
+            });
+
+        });
+
+        var isBar = false, mouseY = 0, oh = 0;
+        bar.on("mousedown", function (e) {
+            mouseY = e.pageY;
+            oh = $(this).position().top * (he2 / he1);
+            //console.log(oh+"|oh");
+            $(this).addClass("catabar_on");
+            isBar = true;
+
+
+        });
+        $(document).on("mousemove", function (e) {
+
+            if (isBar) {
+                var _mouseH = (e.pageY - mouseY)*he2/he1 + oh;
+                if (_mouseH < 0) {
+                    _mouseH = 0;
+                }
+                if (_mouseH > (he2 - he1)) {
+                    _mouseH = he2 - he1;
+                }
+                roll.scrollTop(_mouseH);
+
+            }
+            e.preventDefault();
+        });
+        $(document).on("mouseup", function () {
+            isBar = false;
+        });
+    }
+    $(function(){
+        //
+        bar("r1");
+        bar("r2");
+
+    });
+</script>
+</body>
+</html>
