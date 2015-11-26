@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <!-- meta使用viewport以确保页面可自由缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 引入 jQuery Mobile 样式 -->
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <!-- 引入 jQuery 库 -->
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!-- 引入 jQuery Mobile 库 -->
+    <script src="http://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>点击切换</title>
+</head>
+<body>
+<div data-role="page" id="pageone">
+
+    <div data-role="header" data-position="fixed">
+        <h1>欢迎来到我的主页</h1>
+    </div>
+
+    <div data-role="main" class="ui-content">
+        <ol data-role="listview">
+
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+            <li>我现在是一个移动端开发者!!</li>
+
+        </ol>
+
+
+    </div>
+
+    <div data-role="footer" data-position="fixed">
+        <h1>底部文本</h1>
+    </div>
+
+</div>
+<script>
+$(function(){
+
+    var box = $(".ui-content"),
+            bottom=box.outerHeight()-$(window).height()+$(".ui-header").height()+$(".ui-footer").height(),
+            s = $("<div />",{
+                class:"loading"
+            }).text("loading..."),bol=false;
+    var callback = function(){
+        s.replaceWith($("<li />",{
+            class:"ui-li-static ui-body-inherit"
+        }).html('0我现在是一个移动端开发者!!'));
+    };
+    $(window).on("scroll",function(){
+        var top = $(window).scrollTop();
+
+        /*if(top==0&&bol){
+            s.insertBefore(box.children("ol").find("li:first"));
+            s.replaceWith($("<li />",{
+                class:"ui-li-static ui-body-inherit"
+            }).html('0我现在是一个移动端开发者!!'));
+        }*/
+        if(top>=bottom){
+            s.insertAfter(box.children("ol").find("li:last"));
+
+            setTimeout(callback,1000);
+
+        }
+
+    });
+
+
+})
+</script>
+</body>
+</html>
