@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>人物动</title>
+</head>
+<body>
+<style>
+    @-moz-keyframes bgAnimation {
+        0% {background-position:0px 0;}
+        100% {background-position:0 -1500%;}
+    }
+    @-webkit-keyframes bgAnimation {
+        0% {background-position:0px 0;}
+        100% {background-position:0 -1500%;}
+    }
+
+    @-moz-keyframes bgAnimationOut {
+        0% {background-position:0px -1500%;}
+        100% {background-position:0px -0%;}
+    }
+    @-webkit-keyframes bgAnimationOut {
+        0% {background-position:0px -1500%;}
+        100% {background-position:0px -0%;}
+    }
+
+    .onAnimation{
+        -webkit-animation:bgAnimation 0.5s steps(15) forwards;
+        -moz-animation:bgAnimation 0.5s steps(15) forwards;
+        animation:bgAnimation 0.5s steps(15) forwards;
+    }
+    .outAnimation{
+        -webkit-animation:bgAnimationOut 0.5s steps(15);
+        -moz-animation:bgAnimationOut 0.5s steps(15);
+        animation:bgAnimationOut 0.5s steps(15);
+    }
+
+
+    .sprite-animation-row {
+        display: block;
+        width: 300px;
+        height: 410px;
+    }
+
+</style>
+
+
+<span class="sprite-animation-row" style="background-image: url(http://mat1.gtimg.com/15/people/1297358.jpg);"></span>
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        $(".sprite-animation-row").on("mouseenter",function(){
+            $(this).removeClass("outAnimation").addClass("onAnimation");
+        });
+        $(".sprite-animation-row").on("mouseleave",function(){
+            $(this).removeClass("onAnimation").addClass("outAnimation");
+        });
+    });
+</script>
+</body>
+</html>
