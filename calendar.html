@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>分页效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;transition:all .5s;-webkit-transition:all .5s;}
+    .calendaryear{width:208px;height:25px;margin:0 auto;}
+    .calendarPrev,.month,.year,.calendarNext{height:25px;line-height:25px;color:#999;float:left;display:inline-block;}
+    .calendarPrev,.calendarNext{width:11px;}
+    .month{width:80px;margin:0 7px 0 12px;}
+    .year{width:36px;margin-right:12px;}
+    .week{width:637px;height:40px;line-height:40px;margin:10px auto;padding:0 3px 0 2px;background:#fff;}
+    .week span{width:91px;text-align:center;display:inline-block;}
+
+    .daybox{width:637px;margin:0 auto;border-left:1px solid #dadada;border-top:1px solid #dadada;}
+    .daybox .day{width:90px;height:86px;float:left;position:relative;border-bottom:1px solid #dadada;border-right:1px solid #dadada;}
+    .yesday{background:#fff;}
+    .daynum{display:block;padding:7px;color:#9f9d9a;}
+    .daybox .day{background:#fff;}
+    .daybox .day-cur{background:#f00;}
+    .day span{color:#000;}
+    .day-gray span{color:#bbb;}
+</style>
+<div class="calendaryear">
+    <a href="#prev" class="calendarPrev">&lt;</a>
+    <span class="month">September</span>
+    <span class="year">2015</span>
+    <a href="#next" class="calendarNext">&gt;</a>
+</div>
+<div class="week">
+    <span>周一</span><span>周二</span><span>周三</span><span>周四</span><span>周五</span><span>周六</span><span>周日</span>
+</div>
+<div class="daybox clear">
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    function reDate(y,m,day){
+        var d=new Date(y,m,0),
+                sumDay = d.getDate(),
+                week = "日 一 二 三 四 五 六".split(" "),
+                startWeek = 0,
+                endWeek = 0,
+                html='',
+                enMath=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+
+        var dPrev = new Date(y,m-1,0),
+                prevSumday=dPrev.getDate();
+
+        //console.log(y,m);
+        $(".year").html(y);
+
+        $(".month").data("month",m).html(enMath[m-1]);
+        //console.log($(".month").data("month"));
+        d.setDate(1);
+        startWeek = d.getDay()==0?7:d.getDay();
+        d.setDate(sumDay);
+        endWeek = d.getDay();
+        //console.log(sumDay,startWeek,endWeek);
+
+        for(var i=prevSumday-startWeek+2;i<=prevSumday;i++){
+            html += '<div class="day day-gray">'+
+                    '<span class="daynum">'+i+'</span>'+
+                    '</div>';
+        }
+        for(var i=1;i<=sumDay;i++){
+
+            html += '<div class="day '+(i==day?"day-cur":"")+'">'+
+                    '<span class="daynum">'+i+'</span>'+
+                    '</div>';
+        }
+        if(endWeek > 0){
+            for(var i=1;i<=7-endWeek;i++){
+                html += '<div class="day day-gray">'+
+                        '<span class="daynum">'+i+'</span>'+
+                        '</div>';
+            }
+        }
+
+        $(".daybox").html(html);
+
+
+    }
+
+    reDate(new Date().getFullYear(),new Date().getMonth()+1,new Date().getDate());
+
+    $(function(){
+        $(".calendarNext").on("click",function(){
+            var y = $(".year").html(),
+                    m = $(".month").data("month"),
+                    date = new Date(y,m+1,0),
+                    enMath=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+
+            reDate(date.getFullYear(),date.getMonth()+1,0);
+        });
+
+        $(".calendarPrev").on("click",function(){
+            var y = $(".year").html(),
+                    m = $(".month").data("month"),
+                    date = new Date(y,m,0),
+                    enMath=['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+
+            reDate(date.getFullYear(),date.getMonth(),0);
+        });
+    });
+</script>
+</body>
+</html>
