@@ -32,6 +32,19 @@
 <script src="js/zepto.js"></script>
 <script src="js/init.js"></script>
 <script>
+    //多次点击验证
+    var t1 = (new Date()).getTime(),
+            isTap = function(){
+                var t2  = (new Date()).getTime();
+                if(t2 - t1 < 200){
+                    return false;
+                }else{
+                    t1 = t2;
+                    return true;
+                }
+
+            };
+
 $(function(){
     $(".wap_slide").css({
         "height":$(window).height(),
