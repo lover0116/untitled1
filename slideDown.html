@@ -12,11 +12,15 @@
     .x-slide{width:500px;margin:0 auto;border:1px solid #ccc;}
     .x-slide-view{float:right;}
     .x-slide-box{padding:20px;display:none;}
+    .x-slide-view .x-0{display:none;}
+    .x-slide-view .x-1{display:block;}
+    .x-slide-viewed .x-1{display:none;}
+    .x-slide-viewed .x-0{display:block;}
 </style>
 
 <div class="x-slide">
     <div class="x-slide-title">
-        <a href="#1" class="x-slide-view">查看详情</a>
+        <a href="#1" class="x-slide-view"><span class="x-0">收起详情</span><span class="x-1">查看详情</span></a>
         <p>标题</p>
 
     </div>
@@ -35,6 +39,7 @@
         //
         $(".x-slide-view").on("click",function(){
             $(".x-slide-box").slideToggle();
+            $(this).toggleClass("x-slide-viewed");
         })
 
     });
