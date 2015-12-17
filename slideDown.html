@@ -16,11 +16,13 @@
     .x-slide-view .x-1{display:block;}
     .x-slide-viewed .x-1{display:none;}
     .x-slide-viewed .x-0{display:block;}
+    .x-0 em,.x-1 em{width:0;height:0;display:inline-block;position:relative;overflow:hidden;border:4px solid transparent;border-top-color:#000;}
+    .x-0 em{border-top-color:transparent;border-bottom-color:#000;top:-4px;}
 </style>
 
 <div class="x-slide">
     <div class="x-slide-title">
-        <a href="#1" class="x-slide-view"><span class="x-0">收起详情</span><span class="x-1">查看详情</span></a>
+        <a href="#1" class="x-slide-view"><span class="x-0">收起详情<em></em></span><span class="x-1">查看详情<em></em></span></a>
         <p>标题</p>
 
     </div>
