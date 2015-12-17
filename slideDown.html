@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>图片文字上下滑动效果</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    .x-slide-title{width:100%;border-bottom:1px solid #ccc;}
+    .x-slide{width:500px;margin:0 auto;border:1px solid #ccc;}
+    .x-slide-view{float:right;}
+    .x-slide-box{padding:20px;display:none;}
+</style>
+
+<div class="x-slide">
+    <div class="x-slide-title">
+        <a href="#1" class="x-slide-view">查看详情</a>
+        <p>标题</p>
+
+    </div>
+    <div class="x-slide-box">
+        我是内容我是内容我是内容我是内容我是内容我是内容...<br >
+        我是内容我是内容我是内容我是内容我是内容我是内容...<br >
+        我是内容我是内容我是内容我是内容我是内容我是内容...<br >
+        我是内容我是内容我是内容我是内容我是内容我是内容...<br >
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        //
+        $(".x-slide-view").on("click",function(){
+            $(".x-slide-box").slideToggle();
+        })
+
+    });
+</script>
+</body>
+</html>
