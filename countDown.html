@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>模板</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+</style>
+
+<span class="x-day"></span>
+天
+<span class="x-hour"></span>
+时
+<span class="x-min"></span>
+分
+<span class="x-second"></span>
+秒
+
+<!--<p><input type="button" value="pause" id="pause" /> <input type="button" value="play" id="play" /> </p>-->
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+(function(){
+    var oPub = {
+        countDown:{
+            cdOp:{
+                timer:null,
+                s:"",
+                cb:null
+            },
+            cdPause:function(){
+                //
+                if(oPub.countDown.cdOp.timer!=null){
+                    clearInterval(oPub.countDown.cdOp.timer);
+                    oPub.countDown.cdOp.timer = null;
+                }
+            },
+            cdPlay:function(){
+                if(oPub.countDown.cdOp.timer == null){
+                    oPub.countDown.cdOp.timer = setInterval(function(){
+                        oPub.countDown.cdInit(oPub.countDown.cdOp.s,oPub.countDown.cdOp.cb);
+                    },1000);
+                }
+            },
+            cdInit:function(s,cb){
+                var oo = oPub.countDown.cdOp;
+                var curDate = new Date(),sArr = s.split("-"),
+                        year = sArr[0],month = sArr[1] - 1,day=sArr[2],
+                        resDate = new Date(year,month,day),
+                        timeDiff = resDate - curDate,d,h, m,sec;
+
+                if(timeDiff <= 0){
+                    //倒计时结束
+                    oPub.countDown.cdPause();
+                    $(".x-day").text("00");
+                    $(".x-hour").text("00");
+                    $(".x-min").text("00");
+                    $(".x-second").text("00");
+
+                    if(typeof arguments[1]=="function"){
+                        cb();
+                    }
+
+                    return false;
+                }
+
+                var newDate = new Date(timeDiff);
+                d = Math.floor(timeDiff/1000/60/60/24);
+                h = ("00" + (Math.floor(timeDiff/1000/60/60%24))).slice(-2);
+                m = ("00" + (Math.floor(timeDiff/1000/60%60))).slice(-2);
+                sec = ("00" + (Math.floor(timeDiff/1000%60))).slice(-2);
+
+                $(".x-day").text(d);//天
+                $(".x-hour").text(h);//时
+                $(".x-min").text(m);//分
+                $(".x-second").text(sec);//秒
+                if(oo.cb == null){
+                    oo.cb = cb;
+                    oo.s = s;
+                    oPub.countDown.cdPlay();
+                }
+            }
+        }
+    };
+    window.oPub = oPub;
+})();
+
+//161082633815
+//3229813262
+$(function(){
+    oPub.countDown.cdInit('2019-1-31');
+
+    $("#pause").on("click",function(){
+       //
+        oPub.countDown.cdPause();
+    });
+    $("#play").on("click",function(){
+        //
+        oPub.countDown.cdPlay();
+    });
+});
+
+</script>
+</body>
+</html>

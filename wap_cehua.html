@@ -17,7 +17,7 @@
 
 <div class="wap_page">
     <a href="#1" class="clickMe">Click Me</a>
-    切换谷歌手机浏览模式
+    手机浏览模式
 </div>
 
 <div class="wap_slide">
@@ -51,7 +51,9 @@ $(function(){
         "transform":"translateX(-"+($(window).width())+"px)"
     });
     $(".clickMe").on("tap",function(){
-        $(".wap_slide").addClass("wap_slideShow");
+        if(isTap()){
+            $(".wap_slide").addClass("wap_slideShow");
+        }
     });
     $(".wap_slide").on("touchend",function(e){
         var touch = e.changedTouches[0];

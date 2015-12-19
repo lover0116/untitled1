@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>wap-轮播</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+
+    body{overflow-x:hidden;}
+    em{font-style:normal;}
+    .x-slider{width:100%;height:135px;position:relative;overflow:hidden;transition:height .3s linear;-webkit-transition:height .3s linear;}
+    .x-slider-scroller{display:box;display:-webkit-box;position:relative;left:0;z-index:20;transition:all .35s ease;-webkit-transition:all .35s ease;}
+
+
+    .slider-item{width:100%;height:100%;display:block;}
+
+    .nav-slider{width:100%;text-align:center;position:absolute;left:0;bottom:3px;z-index:20;}
+    .nav-slider li{display:inline-block;width:4px;height:4px;border:1px solid #fff;border-radius:50%;}
+    .nav-slider .current{background:#fff;}
+</style>
+<!---slider--->
+<div class="x-slider">
+    <p class="x-slider-scroller">
+        <a href="#" class="slider-item"><img src="images/ky-bnr1.jpg" alt="" class="x_block" width="100%" ></a>
+        <a href="#" class="slider-item"><img src="images/ky-bnr2.jpg" alt="" class="x_block" width="100%" ></a>
+        <a href="#" class="slider-item"><img src="images/ky-bnr3.jpg" alt="" class="x_block" width="100%" ></a>
+    </p>
+    <ul class="nav-slider">
+        <li class="current"></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+<!---slider end--->
+
+
+
+
+
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+    function xSlider(cls){
+        //
+        var o = $("."+cls),
+                w=document.body.scrollWidth,
+                num=0,
+                len=o.find(".slider-item").length,
+                timer = null;
+        /**执行**/
+        function init(n){
+            //w*n
+            clearInterval(timer);
+            if(n >= len){
+                o.css("left",(-w*(n-1)*1.2)+"px");
+                setTimeout(function(){
+                    o.css("left",(-w*(n-1)+"px"));
+                },350);
+                return ;
+            }
+            if(n < 0){
+                o.css("left",(w*0.2)+"px");
+                setTimeout(function(){
+                    o.css("left",0);
+                },350);
+                return ;
+            }
+            o.next().find("li").eq(n).addClass("current").siblings().removeClass("current");
+            o.css("left",(-w*n)+"px");
+            /*o.attr("style",'transition:transform .35s cubic-bezier(0, 0, 0.25, 1);transform:translate3d(-'+(w*n)+'px, 0px, 0px);'+
+             '-webkit-transition:transform .35s cubic-bezier(0, 0, 0.25, 1);-webkit-transform:translate3d(-'+(w*n)+'px, 0px, 0px);'+
+             'transform-style: preserve-3d;-webkit-transform-style: preserve-3d;');*/
+            setTimeout(function(){
+                timer = setInterval(autoplay,5000);
+            },350);
+        }
+        /*auto*/
+        function autoplay(){
+            num = o.next().find(".current").index() + 1;
+            if(num >= len){
+                num = 0;
+            }
+            init(num);
+        }
+        //左滑
+        o.on('touchmove', function (event) {
+            event.preventDefault();
+        });
+        o.on("swipeLeft",function(e){
+            num = o.next().find(".current").index() + 1;
+            init(num);
+
+        });
+        //右滑
+        o.on("swipeRight",function(e){
+            num = o.next().find(".current").index() - 1;
+
+            init(num);
+        });
+
+        timer = setInterval(autoplay,5000);
+    }
+
+
+    $(function(){
+        xSlider("x-slider-scroller");
+
+        var width = document.body.scrollWidth,sliderH = width*230/640;
+        sliderH = sliderH > 230?230:sliderH;
+
+        setTimeout(function(){
+            $(".x-slider").css("height",sliderH+"px");
+        },100);
+
+    });
+</script>
+</body>
+</html>
