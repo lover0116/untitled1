@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>模板</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+    .flex-box{width:100%;min-width:320px;max-width:1600px;margin:0 auto;}
+    .flex-ul{width:100%;overflow:hidden;}
+    .flex-li{width:20%;height:200px;margin:0 2% 0 3%;float:left;color:#fff;position:relative;background:#000;}
+
+    .flex-li2{background:#f00;}
+    .flex-li3{background:#900;}
+    .flex-li4{background:#666;}
+
+    .flex-li-con{width:0;height:0;overflow:hidden;position:absolute;left:0;top:0;color:#000;background:#fff;}
+
+    @media (max-width:400px){
+        .flex-li{width:96%;margin:10px 2%;}
+    }
+    @media (min-width:401px) and (max-width:800px){
+        .flex-box{max-width:800px;}
+        .flex-li{width:46%;margin:10px 2%;}
+    }
+    @media (min-width:801px) and (max-width:1360px){
+        .flex-box{max-width:1000px;}
+        .flex-li{width:23%;margin:0 1%;}
+    }
+</style>
+
+<div class="flex-box">
+    <ul class="flex-ul">
+        <li class="flex-li flex-li1">1
+            <div class="flex-li-con">1的内容</div>
+        </li>
+        <li class="flex-li flex-li2">2
+            <div class="flex-li-con">2的内容</div>
+        </li>
+        <li class="flex-li flex-li3">3
+            <div class="flex-li-con">3的内容</div>
+        </li>
+        <li class="flex-li flex-li4">4
+            <div class="flex-li-con">4的内容</div>
+        </li>
+    </ul>
+</div>
+
+
+
+<!--伸缩盒模型--->
+<style>
+    .d-flexul{width:100%;display:box;display:-webkit-box;}
+    .d-flexli{box-flex:1;-webkit-box-flex:1;margin:10px 1%;height:200px;background:#000;}
+</style>
+<div class="d-flexbox">
+    <ul class="d-flexul">
+        <li class="d-flexli d-flexli-1">1
+            <div class="d-flexli-con">1的内容</div>
+        </li>
+        <li class="d-flexli d-flexli-2">2
+            <div class="d-flexli-con">2的内容</div>
+        </li>
+        <li class="d-flexli d-flexli-3">3
+            <div class="d-flexli-con">3的内容</div>
+        </li>
+        <li class="d-flexli d-flexli-4">4
+            <div class="d-flexli-con">4的内容</div>
+        </li>
+    </ul>
+</div>
+<!-----伸缩盒模型 移动端不用浮动 ，用这个---->
+<script src="js/jquery.min.js"></script>
+<script src="js/init.js"></script>
+
+<script>
+    $(function(){
+        $(".flex-li").on("mouseenter",function(){
+            var _this = $(this),_ani = _this.find(".flex-li-con"),
+                    _w = _this.width(),_h = _this.height();
+            //防止执行动画时触发
+            /*if(_ani.is(":animated")){
+             return false;
+             }*/
+            _ani.animate({width:_w/2+"px"},"fast");
+            _ani.animate({height:_h+"px"},"slow");
+            _ani.animate({width:_w+"px"},"slow");
+
+        });
+        $(".flex-li").on("mouseleave",function(){
+            var _this = $(this),_ani = _this.find(".flex-li-con"),
+                    _w = _this.width(),_h = _this.height();
+            _ani.animate({width:_w/2+"px"},"slow");
+            _ani.animate({height:0},"slow");
+            _ani.animate({width:0},"fast");
+
+        });
+    })
+</script>
+</body>
+</html>
