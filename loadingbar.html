@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>进度条</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+
+    .x-loadbox{width:500px;height:50px;margin:0 auto;position:relative;}
+    .x-loadbg{width:298px;height:48px;border:1px solid #000;}
+    .x-loadbar{width:2%;height:100%;background-color:#000;transition:width .3s ease;-webkit-transition:width .3s ease;-moz-transition:width .3s ease;-o-transition:width .3s ease;-ms-transition:width .3s ease;}
+    .x-loadnumbox{position:absolute;left:310px;height:48px;line-height:48px;font-size:20px;top:1px;}
+</style>
+
+<div class="x-loadbox">
+    <div class="x-loadbg">
+        <div class="x-loadbar"></div>
+    </div>
+    <span class="x-loadnumbox"><em class="x-loadnum">1</em> %</span>
+</div>
+
+
+
+
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        var loadTime = null,n= 1,loadSpeed=300;
+        var loadFun = function(){
+            var bei = Math.floor(Math.random()*10);
+            n+=bei;//bei为随机数可以改为固定数字，例：n+=1
+            if(n>100){
+                $(".x-loadbar").css("width","100%");
+                $(".x-loadnum").text('100');
+                clearTimeout(loadTime);
+                return false;
+            }
+            $(".x-loadbar").css("width",n+"%");
+            $(".x-loadnum").text(n);
+            loadTime = setTimeout(loadFun,loadSpeed);
+        };
+        loadTime = setTimeout(loadFun,loadSpeed);
+
+    })
+</script>
+</body>
+</html>
