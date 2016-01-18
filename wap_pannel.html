@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>模板</title>
+</head>
+<body>
+<style>
+    *{margin:0;padding:0;}
+    li{list-style-type:none;}
+    .pannel{position:fixed;left:0;top:0;right:0;bottom:0;display:none;background:rgba(0,0,0,.5);}
+    .pannelBox{width:100px;height:100px;position:absolute;left:50%;top:50%;margin:-50px 0 0 -50px;opacity:0;transition:all .5s ease;-webkit-transition:all .5s ease;background:#fff;}
+
+
+    .p-show{opacity:1;}
+</style>
+<input type="button" class="pop" value="Click Me" />
+
+<div class="pannel">
+    <div class="pannelBox">
+        <p>123123</p>
+
+    </div>
+</div>
+
+
+
+
+<script src="js/zepto.js"></script>
+<script src="js/init.js"></script>
+<script>
+    $(function(){
+        $(".pop").on("tap",function(){
+            $(".pannel").show();
+            setTimeout(function(){
+                $(".pannelBox").addClass("p-show");
+            },500);
+        });
+        $(".pannel").on("tap",function(e){
+            //
+            if($(e.target).hasClass("pannel")){
+                $(".pannelBox").removeClass("p-show");
+                setTimeout(function(){
+                    $(".pannel").hide();
+                },500);
+            }
+        })
+    })
+</script>
+</body>
+</html>
