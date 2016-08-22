@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <title>wap</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <style>
+
+        *{margin:0;padding:0;}
+        li{list-style-type:none;}
+        .tc{text-align:center;}
+        .tr{text-align:right;}
+
+        body,html{width:100%;height:100%;overflow-x:hidden;}
+
+        em{font-style:normal;}
+        .x-slider{width:100%;height:100%;overflow:hidden;}
+        .x-slider-scroller{height:100%;display:box;display:-webkit-box;position:relative;left:0;z-index:20;transition:all .35s ease;-webkit-transition:all .35s ease;}
+        .x-slider-scroller li{width:100%;box-flex:1;-webkit-box-flex:1;}
+        .x-slider-scroller li:nth-child(1){background:#eaebec;}
+        .x-slider-scroller li:nth-child(2){background:#f0c6c6;}
+        .x-slider-scroller li:nth-child(3){background:#c6ddf0;}
+
+
+
+        .p1_1,.p1_2{font:20px/40px "Microsoft Yahei";}
+
+
+        .cur .p1_1{-webkit-animation:pOne 1.5s ease 1 forwards;}
+        .cur .p1_2{-webkit-animation:pTwo 2s ease 1 forwards;}
+        .cur .p1_3{-webkit-animation:pThree 2s ease 1 forwards;-webkit-animation-delay:2s;}
+
+
+
+
+        @-webkit-keyframes pOne{
+            0% {
+                padding-left:0;opacity:0;
+            }
+            100% {
+                padding-left:50px;opacity:1;
+            }
+        }
+        @-webkit-keyframes pTwo{
+            0% {
+                padding-right:0;opacity:0;
+            }
+            100% {
+                padding-right:50px;opacity:1;
+            }
+        }
+        @-webkit-keyframes pThree{
+            0%,50%,100% {
+                -webkit-transform:skewX(0deg);
+            }
+            25%,75% {
+                -webkit-transform:skewX(-30deg);
+            }
+
+        }
+
+        .btn{width:40%;height:32px;line-height:32px;color:#fff;border:none;background:#000;}
+        .p2_1 .btn{margin-top:20px;}
+        .cur .p2_1 .btn{-webkit-animation:pTwoOne 1s ease infinite forwards;}
+
+        @-webkit-keyframes pTwoOne{
+            0%,50%,100% {
+                background:#000;
+            }
+            25%,75% {
+                background:#f00;
+            }
+        }
+
+        .p3_1{width:200px;height:200px;position:relative;}
+        .p3_1_1,.p3_1_2{display: block;width:100%;height:100%;color:#fff;border-radius:200px;
+            -webkit-transform-style: preserve-3d;
+            -webkit-backface-visibility: hidden;
+            -webkit-transition: all .4s ease-in-out;
+            text-align:center;
+        }
+        .p3_1_1{ -webkit-transform:rotateX(0deg) rotateY(0deg);background:#000;}
+        .p3_1_cur .p3_1_1{-webkit-transform: rotateY(180deg);}
+        .p3_1_2{
+            position: absolute;left: 0;top: 0;background:blue;
+            -webkit-transform: rotateX(0deg) rotateY(180deg);
+        }
+        .p3_1_cur .p3_1_2{-webkit-transform: rotateY(0deg);}
+
+        .p3_2{width:0%;height:2px;background:-webkit-linear-gradient(left,#000,#f00);}
+        .cur .p3_2{-webkit-animation:pThreeTwo 3s ease 1 forwards;}
+
+        @-webkit-keyframes pThreeTwo{
+            0%{
+                width:0%;
+            }
+            100%{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="x-slider">
+    <ul class="x-slider-scroller">
+        <li class="cur">
+            <p class="p1_1">我从左边来</p>
+            <p class="p1_2 tr">我从右边来</p>
+            <p class="p1_3 tc">翻一下</p>
+
+        </li>
+        <li>
+            <p class="p2_1 tc"><input type="button" class="btn" value="闪闪闪" /></p>
+        </li>
+        <li>
+            <div class="p3_1">
+                <div class="p3_1_1">点我</div>
+                <div class="p3_1_2">点我</div>
+            </div>
+            <div class="p3_2"></div>
+        </li>
+    </ul>
+</div>
+<script src="js/zepto.js"></script>
+
+
+<script>
+    (function(){
+        var oo = {
+            dom:{
+                o:$(".x-slider-scroller"),
+                timer:null,
+                ctrl:0,
+                speed:5000
+            },
+            roll:function(n,isauto){
+                //w*n
+                var _self =  this,
+                        o = _self.dom.o,
+                        timer = _self.dom.timer,
+                        len = o.find("li").length,
+                        w = document.body.scrollWidth;
+
+                if(n >= len){
+                    o.css("left",(-w*(n-1)*1.2)+"px");
+                    setTimeout(function(){
+                        o.css("left",(-w*(n-1)+"px"));
+                    },350);
+                    _self.dom.ctrl--;
+                    return ;
+                }
+
+                if(n < 0){
+                    o.css("left",(w*0.2)+"px");
+                    setTimeout(function(){
+                        o.css("left",0);
+                    },350);
+                    _self.dom.ctrl++;
+                    return ;
+                }
+
+                o.css("left",(-w*n)+"px");
+                o.find("li").eq(n).addClass("cur").siblings().removeClass("cur");
+                if(n>=len-1&&isauto=="auto"){
+                    clearTimeout(timer);
+                    return ;
+                }
+                if(isauto=="auto"){
+                    timer = setTimeout(_self.autoPlay,_self.dom.speed);
+                }
+
+            },
+            init:function(){
+                var _self = this;
+                _self.addEvent();
+            },
+            autoPlay:function(){
+                oo.dom.ctrl++;
+                oo.roll(oo.dom.ctrl,"auto");
+            },
+            addEvent:function(){
+                var _self = this;
+
+                var o = _self.dom.o;
+                o.css("width",o.find("li").length*100+"%");
+                //自动播放
+                _self.dom.timer = setTimeout(_self.autoPlay,_self.dom.speed);
+
+                //左滑
+                o.on('touchmove', function (event) {
+                    event.preventDefault();
+                });
+                o.on("swipeLeft",function(e){
+                    _self.dom.ctrl++;
+                    _self.roll(_self.dom.ctrl);
+
+                });
+                //右滑
+                o.on("swipeRight",function(e){
+                    _self.dom.ctrl--;
+                    _self.roll(_self.dom.ctrl);
+                });
+
+                $(".p3_1").on("tap",function(){
+                    $(this).toggleClass("p3_1_cur");
+                });
+
+            }
+        };
+        oo.init();
+    })();
+
+
+</script>
+</body>
+</html>
