@@ -107,28 +107,8 @@ function xRolfn(op){
         clearTimeout(_timer);
     });
 
-    if(_dir=="top"){
-        _timer = setTimeout(dirfn.top,100);
-        dirfn.mouseleavecall(dirfn.top);
-        return false;
-    }
-    if(_dir=="bottom"){
-        _timer = setTimeout(dirfn.bottom,100);
-        dirfn.mouseleavecall(dirfn.bottom);
-        return false;
-    }
-    if(_dir=="left"){
-        _timer = setTimeout(dirfn.left,100);
-        dirfn.mouseleavecall(dirfn.left);
-        return false;
-    }
-    if(_dir=="right"){
-        _timer = setTimeout(dirfn.right,100);
-        dirfn.mouseleavecall(dirfn.right);
-        return false;
-    }
-
-    _timer = setTimeout(dirfn.top,100);
+    _timer = setTimeout(dirfn[_dir],100);
+    dirfn.mouseleavecall(dirfn[_dir]);
 
 
 
